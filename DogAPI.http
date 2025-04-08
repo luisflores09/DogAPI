@@ -1,0 +1,31 @@
+@DogAPI_HostAddress = http://localhost:5221
+
+### Create a new dog
+POST {{DogAPI_HostAddress}}/api/dogs
+Content-Type: application/json
+
+{
+    "name": "Toby",
+    "breed": "Beagle Mix",
+    "age": 7
+}
+
+### Get all dogs
+GET {{DogAPI_HostAddress}}/api/dogs
+
+### Get a specific dog by ID
+GET {{DogAPI_HostAddress}}/api/dogs/1
+
+### Update a dog by ID
+PUT {{DogAPI_HostAddress}}/api/dogs/3
+Content-Type: application/json
+
+{
+    "id": 3,
+    "name": "Buddy",
+    "breed": "Labrador Retriever",
+    "age": 4
+}
+
+### Delete a dog by ID
+DELETE {{DogAPI_HostAddress}}/api/dogs/2
