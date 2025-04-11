@@ -1,19 +1,25 @@
 using DogAPI.Data;
 using Microsoft.EntityFrameworkCore;
-using DotNetEnv;
+// using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
 
-Env.Load();
+// Env.Load();
 
-var connectionString = $"Host={Env.GetString("DB_HOST")};" +
-                       $"Port={Env.GetString("DB_PORT")};" +
-                       $"Database={Env.GetString("DB_NAME")};" +
-                       $"Username={Env.GetString("DB_USER")};" +
-                       $"Password={Env.GetString("DB_PASSWORD")}";
+// builder.Configuration.AddEnvironmentVariables();
+var sqlConnection = builder.Configuration.GetConnectionString("DogAPI-SqlDb");
 
+// var sqlConnection = builder.Configuration["ConnectionStrings:DogAPI:SqlDb"];
+
+// var connectionString = $"Host={Env.GetString("DB_HOST")};" +
+//                        $"Port={Env.GetString("DB_PORT")};" +
+//                        $"Database={Env.GetString("DB_NAME")};" +
+//                        $"Username={Env.GetString("DB_USER")};" +
+//                        $"Password={Env.GetString("DB_PASSWORD")}";
+// builder.Services.AddDbContext<DogDbContext>(options =>
+//     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddDbContext<DogDbContext>(options =>
-    options.UseNpgsql(connectionString));
+    options.UseSqlServer(sqlConnection));
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
